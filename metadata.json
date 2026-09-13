@@ -1,0 +1,6 @@
+{
+  "name": "Assam Rifles Public School Agartala",
+  "description": "Official portal of Assam Rifles Public School (ARPS), Agartala, Tripura - Affiliated to CBSE New Delhi (Affiliation No. 2030013). Admissions, fee structure, academic notices, faculty, and facilities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
