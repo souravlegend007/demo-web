@@ -1,3 +1,12 @@
+# GitHub Pages Deployment Workflow
+# If you want to use GitHub Actions to deploy to GitHub Pages:
+# 1. On github.com, open your repository (arpsweb).
+# 2. Click "Add file" -> "Create new file".
+# 3. Enter filename: .github/workflows/deploy.yml
+# 4. Paste the content below and click "Commit changes".
+#
+# (Creating it directly on GitHub avoids the "refusing to update workflow without workflow scope" error).
+
 name: Deploy to GitHub Pages
 
 on:
