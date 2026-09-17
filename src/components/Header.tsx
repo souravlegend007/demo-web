@@ -15,7 +15,7 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
     }
   };
 
-  const [logoSrc, setLogoSrc] = useState(logoImg || './arps-logo.png');
+  const [logoSrc, setLogoSrc] = useState<string>(logoImg || './arps-logo.png');
 
   return (
     <div className="bg-white border-b border-slate-100">
@@ -36,12 +36,8 @@ export const Header: React.FC<HeaderProps> = ({ onNavigate }) => {
                   className="w-full h-full object-contain p-0.5"
                   referrerPolicy="no-referrer"
                   onError={() => {
-                    if (logoSrc !== './arps-logo.png') {
-                      setLogoSrc('./arps-logo.png');
-                    } else if (logoSrc !== './assets/arps-logo.png') {
-                      setLogoSrc('./assets/arps-logo.png');
-                    } else {
-                      setLogoSrc('arps-logo.jpg');
+                    if (logoSrc.endsWith('.png')) {
+                      setLogoSrc('./arps-logo.jpg');
                     }
                   }}
                 />

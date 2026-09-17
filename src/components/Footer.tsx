@@ -21,7 +21,7 @@ export const Footer: React.FC<FooterProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const [logoSrc, setLogoSrc] = useState(logoImg || './arps-logo.png');
+  const [logoSrc, setLogoSrc] = useState<string>(logoImg || './arps-logo.png');
 
   return (
     <footer className="bg-[#183648] text-slate-300 pt-16 pb-8 border-t-4 border-[#38b6d8]">
@@ -37,12 +37,8 @@ export const Footer: React.FC<FooterProps> = ({
                   className="w-full h-full object-contain"
                   referrerPolicy="no-referrer"
                   onError={() => {
-                    if (logoSrc !== './arps-logo.png') {
-                      setLogoSrc('./arps-logo.png');
-                    } else if (logoSrc !== './assets/arps-logo.png') {
-                      setLogoSrc('./assets/arps-logo.png');
-                    } else {
-                      setLogoSrc('arps-logo.jpg');
+                    if (logoSrc.endsWith('.png')) {
+                      setLogoSrc('./arps-logo.jpg');
                     }
                   }}
                 />
