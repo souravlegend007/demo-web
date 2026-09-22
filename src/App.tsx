@@ -29,10 +29,12 @@ import { MediaFileManagerModal } from './components/MediaFileManagerModal';
 export default function App() {
   const [currentPage, setCurrentPage] = useState<string>(() => {
     if (typeof window !== 'undefined') {
+      const pathname = window.location.pathname.toLowerCase();
+      if (pathname.includes('/admin') || pathname.endsWith('admin') || pathname.includes('admin-portal')) {
+        return 'admin-portal';
+      }
       const hash = window.location.hash.toLowerCase();
-      if (
-        hash.includes('admin')
-      ) {
+      if (hash.includes('admin')) {
         return 'admin-portal';
       }
       const search = window.location.search.toLowerCase();
@@ -54,20 +56,32 @@ export default function App() {
     return false;
   });
 
-  // Sync hash routing for admin page and media manager
+  // Sync hash and pathname routing for admin page and media manager
   useEffect(() => {
-    const handleHash = () => {
+    const handleUrlChange = () => {
+      const pathname = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+
       if (
-        hash.includes('admin')
+        pathname.includes('/admin') ||
+        pathname.endsWith('admin') ||
+        pathname.includes('admin-portal') ||
+        hash.includes('admin') ||
+        search.includes('admin')
       ) {
         setCurrentPage('admin-portal');
       } else if (hash.includes('media-manager') || hash.includes('#media') || hash.includes('#files')) {
         setIsMediaManagerOpen(true);
       }
     };
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+
+    window.addEventListener('hashchange', handleUrlChange);
+    window.addEventListener('popstate', handleUrlChange);
+    return () => {
+      window.removeEventListener('hashchange', handleUrlChange);
+      window.removeEventListener('popstate', handleUrlChange);
+    };
   }, []);
 
   const handleNavigate = (pageOrSectionId: string) => {
