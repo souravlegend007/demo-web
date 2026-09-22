@@ -23,6 +23,7 @@ import { AdminSliderPage } from './components/AdminSliderPage';
 import { TcVerificationModal } from './components/TcVerificationModal';
 import { MandatoryDisclosureModal } from './components/MandatoryDisclosureModal';
 import { OnlineAdmissionModal } from './components/OnlineAdmissionModal';
+import { MediaFileManagerModal } from './components/MediaFileManagerModal';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<string>(() => {
@@ -46,8 +47,15 @@ export default function App() {
   const [isTcModalOpen, setIsTcModalOpen] = useState<boolean>(false);
   const [isDisclosureModalOpen, setIsDisclosureModalOpen] = useState<boolean>(false);
   const [isAdmissionModalOpen, setIsAdmissionModalOpen] = useState<boolean>(false);
+  const [isMediaManagerOpen, setIsMediaManagerOpen] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      return hash.includes('media-manager') || hash.includes('#media') || hash.includes('#files');
+    }
+    return false;
+  });
 
-  // Sync hash routing for admin page
+  // Sync hash routing for admin page and media manager
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.toLowerCase();
@@ -57,6 +65,8 @@ export default function App() {
         hash.includes('manage-slider')
       ) {
         setCurrentPage('admin-slider');
+      } else if (hash.includes('media-manager') || hash.includes('#media') || hash.includes('#files')) {
+        setIsMediaManagerOpen(true);
       }
     };
     window.addEventListener('hashchange', handleHash);
@@ -293,6 +303,7 @@ export default function App() {
         onOpenTcModal={() => setIsTcModalOpen(true)}
         onOpenMandatoryDisclosure={() => setIsDisclosureModalOpen(true)}
         onOpenAdmissionModal={() => setIsAdmissionModalOpen(true)}
+        onOpenMediaManager={() => setIsMediaManagerOpen(true)}
       />
 
       {/* Interactive Modals */}
@@ -309,6 +320,11 @@ export default function App() {
       <OnlineAdmissionModal
         isOpen={isAdmissionModalOpen}
         onClose={() => setIsAdmissionModalOpen(false)}
+      />
+
+      <MediaFileManagerModal
+        isOpen={isMediaManagerOpen}
+        onClose={() => setIsMediaManagerOpen(false)}
       />
     </div>
   );

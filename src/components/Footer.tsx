@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, Mail, Phone, MapPin, ExternalLink, Shield, Lock } from 'lucide-react';
+import { ArrowUp, Mail, Phone, MapPin, ExternalLink, Shield, Lock, FolderOpen } from 'lucide-react';
 import { SCHOOL_INFO } from '../data/schoolData';
 
 const logoImg = '/arps-logo.png';
@@ -9,6 +9,7 @@ interface FooterProps {
   onOpenTcModal: () => void;
   onOpenMandatoryDisclosure: () => void;
   onOpenAdmissionModal: () => void;
+  onOpenMediaManager?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
@@ -16,6 +17,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenTcModal,
   onOpenMandatoryDisclosure,
   onOpenAdmissionModal,
+  onOpenMediaManager,
 }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -228,6 +230,19 @@ export const Footer: React.FC<FooterProps> = ({
               <Lock className="w-3 h-3 text-slate-500" />
               <span>Staff Login</span>
             </button>
+            {onOpenMediaManager && (
+              <>
+                <span className="text-slate-600 hidden sm:inline">&bull;</span>
+                <button
+                  onClick={onOpenMediaManager}
+                  className="inline-flex items-center gap-1 text-slate-400 hover:text-[#38b6d8] transition-colors cursor-pointer text-[11px]"
+                  title="Dedicated Media & Files Manager (/public/media/)"
+                >
+                  <FolderOpen className="w-3.5 h-3.5 text-[#38b6d8]" />
+                  <span>Media &amp; Files Manager</span>
+                </button>
+              </>
+            )}
           </div>
           <div className="flex items-center gap-4">
             <span className="text-[11px] text-slate-400">

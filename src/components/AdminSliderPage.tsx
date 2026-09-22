@@ -39,6 +39,7 @@ import {
   getStoredAdminPasscode,
 } from '../hero-slider/adminAuth';
 import { optimizeSlideImage } from '../hero-slider/imageOptimizer';
+import { MediaFileManagerModal } from './MediaFileManagerModal';
 
 interface AdminSliderPageProps {
   onBackToHome: () => void;
@@ -64,6 +65,7 @@ export const AdminSliderPage: React.FC<AdminSliderPageProps> = ({ onBackToHome }
   const [notification, setNotification] = useState<string | null>(null);
   const [isProcessingUpload, setIsProcessingUpload] = useState<boolean>(false);
   const [copiedLink, setCopiedLink] = useState<boolean>(false);
+  const [isMediaManagerOpen, setIsMediaManagerOpen] = useState<boolean>(false);
 
   // New slide creation form state
   const [isAddingNew, setIsAddingNew] = useState<boolean>(false);
@@ -233,7 +235,7 @@ export const AdminSliderPage: React.FC<AdminSliderPageProps> = ({ onBackToHome }
   // Update text field of selected slide
   const handleUpdateSlideField = (
     slideId: string,
-    field: 'title' | 'category' | 'description',
+    field: 'title' | 'category' | 'description' | 'image',
     val: string
   ) => {
     const updated = slides.map((slide) => {
@@ -478,6 +480,16 @@ export const AdminSliderPage: React.FC<AdminSliderPageProps> = ({ onBackToHome }
             >
               <KeyRound className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden sm:inline">Change Passcode</span>
+            </button>
+
+            {/* Media & Files Manager */}
+            <button
+              onClick={() => setIsMediaManagerOpen(true)}
+              className="px-3 py-1.5 text-xs bg-slate-900 hover:bg-slate-800 border border-[#38b6d8]/60 text-[#38b6d8] rounded-lg flex items-center gap-1.5 transition-colors cursor-pointer font-medium"
+              title="Browse and manage all images & files in /public/media/"
+            >
+              <FolderOpen className="w-3.5 h-3.5 text-[#38b6d8]" />
+              <span>Media &amp; Files</span>
             </button>
 
             {/* Return to website */}
@@ -845,7 +857,15 @@ export const AdminSliderPage: React.FC<AdminSliderPageProps> = ({ onBackToHome }
                   </div>
 
                   {/* Upload Overlay Button */}
-                  <div className="absolute top-3 right-3">
+                  <div className="absolute top-3 right-3 flex items-center gap-2">
+                    <button
+                      onClick={() => setIsMediaManagerOpen(true)}
+                      className="px-3 py-1.5 rounded-lg bg-slate-950/80 hover:bg-slate-950 text-white text-xs font-semibold backdrop-blur-sm border border-[#38b6d8]/60 text-[#38b6d8] flex items-center gap-1.5 shadow-lg transition hover:scale-105 cursor-pointer"
+                      title="Choose from /public/media/ directory"
+                    >
+                      <FolderOpen className="w-3.5 h-3.5 text-[#38b6d8]" />
+                      <span>Browse Media Folder</span>
+                    </button>
                     <button
                       onClick={() => replaceFileInputRef.current?.click()}
                       disabled={isProcessingUpload}
@@ -1007,6 +1027,20 @@ export const AdminSliderPage: React.FC<AdminSliderPageProps> = ({ onBackToHome }
           </div>
         </div>
       )}
+
+      {/* Media and Files Manager Modal */}
+      <MediaFileManagerModal
+        isOpen={isMediaManagerOpen}
+        onClose={() => setIsMediaManagerOpen(false)}
+        onSelectUrl={(url) => {
+          if (activeSlide) {
+            handleUpdateSlideField(activeSlide.id, 'image', url);
+            setIsMediaManagerOpen(false);
+            setNotification(`Updated slide image to: ${url}`);
+            setTimeout(() => setNotification(null), 3000);
+          }
+        }}
+      />
     </div>
   );
 };

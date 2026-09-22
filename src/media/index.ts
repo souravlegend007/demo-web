@@ -9,6 +9,7 @@ import { VIDEOS_DATA } from './videosData';
 export * from './mediaTypes';
 export * from './photosData';
 export * from './videosData';
+export * from './fileManager';
 
 // Photo Query Helpers
 export function getAllPhotos(): PhotoItem[] {
