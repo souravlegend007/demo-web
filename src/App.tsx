@@ -210,7 +210,7 @@ export default function App() {
             />
 
             {/* 2. Information about our school */}
-            <AboutSection />
+            <AboutSection onNavigate={handleNavigate} />
 
             {/* 3. Chairman message & 4. Principal message */}
             <LeadershipMessages />
@@ -251,7 +251,7 @@ export default function App() {
 
             {/* Render selected individual page content */}
             {(currentPage === 'about-vision' || currentPage === 'about-rules' || currentPage === 'about') && (
-              <AboutSection />
+              <AboutSection onNavigate={handleNavigate} />
             )}
 
             {currentPage === 'about-leadership' && (
