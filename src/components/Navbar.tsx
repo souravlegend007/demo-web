@@ -16,6 +16,7 @@ import {
   Mail,
   FileCheck,
   Sparkles,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -375,24 +376,27 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Quick Inquiry CTA on Desktop: Cyan button matching the "Book Now" button in IMG_0001.jpeg */}
+          {/* Admin Panel CTA on Desktop in place of Apply Now */}
           <div className="hidden lg:flex items-center gap-2">
             <button
-              onClick={() => handleNavClick('admission-apply')}
-              className="px-4 py-2 text-xs sm:text-sm font-bold bg-[#38b6d8] hover:bg-[#28a3c4] text-white rounded-md shadow-sm transition flex items-center gap-1.5"
+              onClick={() => handleNavClick('admin-portal')}
+              className="px-4 py-2 text-xs sm:text-sm font-bold bg-[#ef5a5a] hover:bg-[#df4747] text-white rounded-md shadow-sm transition flex items-center gap-1.5 cursor-pointer border border-red-400/30"
+              title="ARPS Administration & Content Management Portal"
             >
-              <Sparkles className="w-4 h-4" />
-              <span>Apply Online</span>
+              <ShieldCheck className="w-4 h-4" />
+              <span>Admin Panel</span>
             </button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-2">
             <button
-              onClick={() => handleNavClick('admission-apply')}
-              className="px-2.5 py-1 text-xs font-bold bg-[#38b6d8] text-white rounded-md shadow-xs"
+              onClick={() => handleNavClick('admin-portal')}
+              className="px-2.5 py-1 text-xs font-bold bg-[#ef5a5a] hover:bg-[#df4747] text-white rounded-md shadow-xs flex items-center gap-1 cursor-pointer"
+              title="Admin Panel"
             >
-              Apply
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>Admin</span>
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -628,10 +632,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Contact &amp; Campus Map</span>
           </button>
 
-          <div className="pt-2 border-t border-slate-200">
+          <div className="pt-2 border-t border-slate-200 space-y-2">
+            <button
+              onClick={() => handleNavClick('admin-portal')}
+              className="w-full py-2.5 bg-[#ef5a5a] hover:bg-[#df4747] text-white font-bold rounded-lg text-center shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span>Admin Panel (Files &amp; Staff)</span>
+            </button>
             <button
               onClick={() => handleNavClick('admission-apply')}
-              className="w-full py-2.5 bg-[#ef5a5a] hover:bg-[#df4747] text-white font-bold rounded-lg text-center shadow-sm"
+              className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold rounded-lg text-center text-xs"
             >
               Online Admission Form (2025-26)
             </button>

@@ -18,6 +18,7 @@ import { AlumniSection } from './components/AlumniSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { AdminSliderPage } from './components/AdminSliderPage';
+import { AdminPanel } from './components/AdminPanel';
 
 // Modals
 import { TcVerificationModal } from './components/TcVerificationModal';
@@ -30,15 +31,13 @@ export default function App() {
     if (typeof window !== 'undefined') {
       const hash = window.location.hash.toLowerCase();
       if (
-        hash.includes('admin/slider') ||
-        hash.includes('admin-slider') ||
-        hash.includes('manage-slider')
+        hash.includes('admin')
       ) {
-        return 'admin-slider';
+        return 'admin-portal';
       }
       const search = window.location.search.toLowerCase();
-      if (search.includes('admin=slider') || search.includes('manage=slider')) {
-        return 'admin-slider';
+      if (search.includes('admin')) {
+        return 'admin-portal';
       }
     }
     return 'home';
@@ -60,11 +59,9 @@ export default function App() {
     const handleHash = () => {
       const hash = window.location.hash.toLowerCase();
       if (
-        hash.includes('admin/slider') ||
-        hash.includes('admin-slider') ||
-        hash.includes('manage-slider')
+        hash.includes('admin')
       ) {
-        setCurrentPage('admin-slider');
+        setCurrentPage('admin-portal');
       } else if (hash.includes('media-manager') || hash.includes('#media') || hash.includes('#files')) {
         setIsMediaManagerOpen(true);
       }
@@ -74,10 +71,10 @@ export default function App() {
   }, []);
 
   const handleNavigate = (pageOrSectionId: string) => {
-    // Admin Slider direct link handling
-    if (pageOrSectionId === 'admin-slider') {
-      setCurrentPage('admin-slider');
-      window.location.hash = '#/admin/slider';
+    // Admin Portal direct link handling
+    if (pageOrSectionId === 'admin-portal' || pageOrSectionId === 'admin' || pageOrSectionId === 'admin-slider') {
+      setCurrentPage('admin-portal');
+      window.location.hash = '#/admin';
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -149,9 +146,15 @@ export default function App() {
     return 'School Portal';
   };
 
-  // Dedicated Admin Slider Manager View
-  if (currentPage === 'admin-slider') {
-    return <AdminSliderPage onBackToHome={() => handleNavigate('home')} />;
+  // Dedicated Admin Panel View (Credentials: userid admin / password admin)
+  if (currentPage === 'admin-portal' || currentPage === 'admin' || currentPage === 'admin-slider') {
+    return (
+      <AdminPanel
+        onBackToHome={() => handleNavigate('home')}
+        onNavigateToStaff={() => handleNavigate('staff')}
+        onNavigateToGallery={() => handleNavigate('gallery')}
+      />
+    );
   }
 
   return (

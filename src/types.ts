@@ -52,11 +52,13 @@ export interface FacultyMember {
   name: string;
   role: string;
   designation?: string;
-  department: string;
+  dateOfJoining?: string;
+  department?: string;
   subject?: string;
+  subjectTaught?: string;
   qualification: string;
-  experience: string;
-  category: 'Teaching' | 'Administration';
+  experience?: string;
+  category: 'Teaching' | 'Administration' | 'PGT' | 'TGT' | 'PRT' | 'Activity & Sports' | 'Support Staff' | string;
   image: string;
   photo?: string;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowUp, Mail, Phone, MapPin, ExternalLink, Shield, Lock, FolderOpen } from 'lucide-react';
+import { ArrowUp, Mail, Phone, MapPin, ExternalLink, Shield, FolderOpen } from 'lucide-react';
 import { SCHOOL_INFO } from '../data/schoolData';
 
 const logoImg = '/arps-logo.png';
@@ -221,15 +221,6 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <span>&copy; {new Date().getFullYear()} Assam Rifles Public School, Agartala. Managed by ARWES.</span>
-            <span className="text-slate-600 hidden sm:inline">&bull;</span>
-            <button
-              onClick={() => onNavigate('admin-slider')}
-              className="inline-flex items-center gap-1 text-slate-500 hover:text-slate-300 transition-colors cursor-pointer text-[11px]"
-              title="Restricted Staff & Admin Portal"
-            >
-              <Lock className="w-3 h-3 text-slate-500" />
-              <span>Staff Login</span>
-            </button>
             {onOpenMediaManager && (
               <>
                 <span className="text-slate-600 hidden sm:inline">&bull;</span>
