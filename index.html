@@ -30,7 +30,33 @@
         }
       </style>
     </div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.__arpsLoaded = false;
+      window.__arpsLoadFallback = function() {
+        if (window.__arpsLoaded) return;
+        window.__arpsLoaded = true;
+        if (!document.querySelector('link[href*="assets/index.css"]')) {
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.crossOrigin = 'anonymous';
+          link.href = './assets/index.css';
+          document.head.appendChild(link);
+        }
+        if (!document.querySelector('script[src*="assets/index.js"]')) {
+          var script = document.createElement('script');
+          script.type = 'module';
+          script.crossOrigin = 'anonymous';
+          script.src = './assets/index.js';
+          document.body.appendChild(script);
+        }
+      };
+      setTimeout(function() {
+        if (!window.__arpsLoaded) {
+          window.__arpsLoadFallback();
+        }
+      }, 1500);
+    </script>
+    <script type="module" src="/src/main.tsx" onerror="window.__arpsLoadFallback()"></script>
   </body>
 </html>
 

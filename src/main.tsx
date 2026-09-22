@@ -11,3 +11,5 @@ createRoot(document.getElementById('root')!).render(
     </ErrorBoundary>
   </StrictMode>,
 );
+
+(window as unknown as { __arpsLoaded?: boolean }).__arpsLoaded = true;
