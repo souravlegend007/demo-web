@@ -1,5 +1,4 @@
 import React from 'react';
-import { ShieldCheck } from 'lucide-react';
 
 interface TopBarProps {
   onOpenTcModal?: () => void;
@@ -8,11 +7,11 @@ interface TopBarProps {
   onNavigate?: (pageId: string) => void;
 }
 
-export const TopBar: React.FC<TopBarProps> = ({ onNavigate }) => {
+export const TopBar: React.FC<TopBarProps> = () => {
   return (
     <header className="text-xs">
       {/* Running Marquee Alert in Warm Golden Yellow (#f3b745) */}
-      <div className="bg-[#f3b745] text-slate-900 font-semibold py-1.5 px-3 sm:px-4 overflow-hidden flex items-center justify-between border-b border-[#e5a832]">
+      <div className="bg-[#f3b745] text-slate-900 font-semibold py-1.5 px-3 sm:px-4 overflow-hidden flex items-center border-b border-[#e5a832]">
         <div className="flex items-center overflow-hidden flex-1 min-w-0">
           <div className="bg-[#ef5a5a] text-white uppercase tracking-wider text-[10px] px-2.5 py-0.5 rounded-full mr-3 shrink-0 font-extrabold flex items-center gap-1 shadow-xs">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse mr-0.5"></span>
@@ -34,18 +33,6 @@ export const TopBar: React.FC<TopBarProps> = ({ onNavigate }) => {
             </div>
           </div>
         </div>
-
-        {onNavigate && (
-          <button
-            onClick={() => onNavigate('admin-portal')}
-            className="ml-3 shrink-0 flex items-center gap-1.5 bg-slate-950 hover:bg-black text-amber-300 px-2.5 py-0.5 rounded text-[11px] font-black shadow-xs border border-amber-400/80 cursor-pointer transition hover:scale-105"
-            title="School Admin & Staff Portal (admin/admin)"
-          >
-            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden sm:inline">Admin Portal</span>
-            <span className="sm:hidden">Admin</span>
-          </button>
-        )}
       </div>
     </header>
   );
