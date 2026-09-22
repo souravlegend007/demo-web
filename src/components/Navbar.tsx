@@ -374,17 +374,31 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Mail className="w-4 h-4" />
               <span>Contact</span>
             </button>
+
+            {/* Admin Portal Menu Link */}
+            <button
+              onClick={() => handleNavClick('admin-portal')}
+              className={`px-3 py-1.5 rounded-md transition flex items-center gap-1.5 font-bold cursor-pointer ${
+                currentPage === 'admin-portal'
+                  ? 'bg-slate-950 text-amber-300 ring-2 ring-amber-400'
+                  : 'text-amber-200 hover:text-white hover:bg-black/20'
+              }`}
+              title="Admin Portal (Credentials: admin / admin)"
+            >
+              <ShieldCheck className="w-4 h-4 text-amber-300" />
+              <span>Admin</span>
+            </button>
           </div>
 
           {/* Admin Panel CTA on Desktop in place of Apply Now */}
-          <div className="hidden lg:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-2 shrink-0">
             <button
               onClick={() => handleNavClick('admin-portal')}
-              className="px-4 py-2 text-xs sm:text-sm font-bold bg-[#ef5a5a] hover:bg-[#df4747] text-white rounded-md shadow-sm transition flex items-center gap-1.5 cursor-pointer border border-red-400/30"
-              title="ARPS Administration & Content Management Portal"
+              className="px-3.5 py-1.5 lg:px-4 lg:py-2 text-xs sm:text-sm font-extrabold bg-slate-950 hover:bg-slate-900 text-amber-300 rounded-lg shadow-md hover:shadow-lg transition-all flex items-center gap-1.5 cursor-pointer border-2 border-amber-400 ring-2 ring-amber-400/20"
+              title="ARPS Administration & Content Management Portal (userid: admin / password: admin)"
             >
-              <ShieldCheck className="w-4 h-4" />
-              <span>Admin Panel</span>
+              <ShieldCheck className="w-4 h-4 text-amber-300" />
+              <span>Admin Portal</span>
             </button>
           </div>
 
@@ -392,15 +406,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="md:hidden flex items-center gap-2">
             <button
               onClick={() => handleNavClick('admin-portal')}
-              className="px-2.5 py-1 text-xs font-bold bg-[#ef5a5a] hover:bg-[#df4747] text-white rounded-md shadow-xs flex items-center gap-1 cursor-pointer"
+              className="px-2.5 py-1 text-xs font-black bg-slate-950 hover:bg-slate-900 text-amber-300 rounded-md shadow-xs flex items-center gap-1 cursor-pointer border border-amber-400"
               title="Admin Panel"
             >
-              <ShieldCheck className="w-3.5 h-3.5" />
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
               <span>Admin</span>
             </button>
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-md text-white hover:bg-white/20 transition"
+              className="p-2 rounded-md text-white hover:bg-white/20 transition cursor-pointer"
               aria-label="Toggle navigation menu"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -412,6 +426,20 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Drawer with Accordion Sub-menus */}
       {mobileOpen && (
         <div className="md:hidden bg-white text-slate-800 border-b border-slate-200 px-4 pt-2 pb-6 space-y-1 text-sm max-h-[80vh] overflow-y-auto shadow-xl">
+          {/* Prominent Admin Access at top of mobile drawer */}
+          <button
+            onClick={() => handleNavClick('admin-portal')}
+            className="w-full mb-2 py-2 px-3 bg-slate-950 hover:bg-slate-900 text-amber-300 font-extrabold rounded-lg text-left shadow-sm flex items-center justify-between border border-amber-400"
+          >
+            <span className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <span>Admin Portal (Login)</span>
+            </span>
+            <span className="text-[10px] bg-amber-400 text-slate-950 font-black px-1.5 py-0.5 rounded uppercase">
+              Admin
+            </span>
+          </button>
+
           <button
             onClick={() => handleNavClick('home')}
             className={`w-full text-left py-2 px-3 rounded-md flex items-center gap-2 ${
@@ -635,9 +663,9 @@ export const Navbar: React.FC<NavbarProps> = ({
           <div className="pt-2 border-t border-slate-200 space-y-2">
             <button
               onClick={() => handleNavClick('admin-portal')}
-              className="w-full py-2.5 bg-[#ef5a5a] hover:bg-[#df4747] text-white font-bold rounded-lg text-center shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-2.5 bg-slate-950 hover:bg-slate-900 text-amber-300 font-extrabold rounded-lg text-center shadow-md flex items-center justify-center gap-2 cursor-pointer border border-amber-400"
             >
-              <ShieldCheck className="w-4 h-4" />
+              <ShieldCheck className="w-4 h-4 text-amber-400" />
               <span>Admin Panel (Files &amp; Staff)</span>
             </button>
             <button
